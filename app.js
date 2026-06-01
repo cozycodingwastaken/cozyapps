@@ -869,6 +869,154 @@ function initCozyAi() {
   appendCozyAiMessage('ai', 'Hi, I am CozyAI. I can help you with anything! Or just chat if you want. Try asking me for a coding tip or some feedback on your project.');
 }
 
+// ─── Imposter Game ──────────────────────────
+const IMPOSTER_EASY_WORDS = [
+  'ice cream', 'turtle', 'rainbow', 'pizza', 'banana', 'guitar', 'balloon', 'sunflower',
+  'butterfly', 'sandwich', 'campfire', 'watermelon', 'pancake', 'snowman', 'dolphin', 'cupcake',
+  'backpack', 'moonlight', 'popcorn', 'strawberry', 'jellyfish', 'toothbrush', 'playground', 'hamburger',
+  'kangaroo', 'lemonade', 'traffic light', 'chocolate', 'pineapple', 'roller coaster', 'goldfish', 'waterfall',
+  'baseball', 'headphones', 'notebook', 'milkshake', 'vacation', 'coconut', 'treasure', 'sunset',
+  'penguin', 'volcano', 'skateboard', 'pillow', 'cookie', 'jacket', 'airplane', 'island'
+];
+
+const imposterState = {
+  totalPlayers: 0,
+  currentPlayer: 1,
+  imposterPlayer: 1,
+  secretWord: '',
+};
+
+function randomItem(list) {
+  return list[Math.floor(Math.random() * list.length)];
+}
+
+function showImposterPanel(panelId) {
+  const ids = [
+    'imposter-setup-panel',
+    'imposter-lock-panel',
+    'imposter-reveal-panel',
+    'imposter-finished-panel',
+  ];
+  ids.forEach(function(id) {
+    const el = document.getElementById(id);
+    if (el) el.style.display = id === panelId ? 'flex' : 'none';
+  });
+}
+
+function resetImposterSlider() {
+  const slider = document.getElementById('imposter-unlock-slider');
+  if (slider) slider.value = '0';
+}
+
+function showLockScreen() {
+  const playerEl = document.getElementById('imposter-lock-player');
+  const titleEl = document.getElementById('imposter-lock-title');
+  if (playerEl) playerEl.textContent = 'Player ' + imposterState.currentPlayer;
+  if (titleEl) titleEl.textContent = 'Slide to unlock your card';
+  resetImposterSlider();
+  showImposterPanel('imposter-lock-panel');
+}
+
+function showRevealScreen() {
+  const isImposter = imposterState.currentPlayer === imposterState.imposterPlayer;
+  const playerEl = document.getElementById('imposter-reveal-player');
+  const roleEl = document.getElementById('imposter-reveal-role');
+  const wordEl = document.getElementById('imposter-reveal-word');
+
+  if (playerEl) playerEl.textContent = 'Player ' + imposterState.currentPlayer;
+  if (roleEl) roleEl.textContent = isImposter ? 'You are the Imposter' : 'Your Word';
+  if (wordEl) {
+    wordEl.textContent = isImposter ? 'No word' : imposterState.secretWord;
+    wordEl.style.color = isImposter ? '#fca5a5' : '#f5f3ff';
+  }
+
+  showImposterPanel('imposter-reveal-panel');
+}
+
+function startImposterRound(playerCount) {
+  imposterState.totalPlayers = playerCount;
+  imposterState.currentPlayer = 1;
+  imposterState.imposterPlayer = Math.floor(Math.random() * playerCount) + 1;
+  imposterState.secretWord = randomItem(IMPOSTER_EASY_WORDS);
+  showLockScreen();
+}
+
+function nextImposterTurn() {
+  if (imposterState.currentPlayer < imposterState.totalPlayers) {
+    imposterState.currentPlayer += 1;
+    showLockScreen();
+    return;
+  }
+  showImposterPanel('imposter-finished-panel');
+}
+
+function initImposterGame() {
+  const root = document.getElementById('imposter-game');
+  if (!root) return;
+
+  const countInput = document.getElementById('imposter-player-count');
+  const errorEl = document.getElementById('imposter-error');
+  const startBtn = document.getElementById('imposter-start-btn');
+  const slider = document.getElementById('imposter-unlock-slider');
+  const okBtn = document.getElementById('imposter-ok-btn');
+  const playAgainBtn = document.getElementById('imposter-play-again-btn');
+  const resetBtn = document.getElementById('imposter-reset-btn');
+
+  function setError(message) {
+    if (errorEl) errorEl.textContent = message || '';
+  }
+
+  if (startBtn) {
+    startBtn.addEventListener('click', function() {
+      const raw = parseInt(countInput && countInput.value ? countInput.value : '', 10);
+      if (!Number.isFinite(raw) || raw < 2) {
+        setError('Minimum is 2 players.');
+        return;
+      }
+      setError('');
+      startImposterRound(raw);
+    });
+  }
+
+  if (countInput) {
+    countInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && startBtn) startBtn.click();
+    });
+  }
+
+  if (slider) {
+    slider.addEventListener('input', function() {
+      const value = Number(slider.value);
+      if (value >= 95) showRevealScreen();
+    });
+  }
+
+  if (okBtn) {
+    okBtn.addEventListener('click', function() {
+      nextImposterTurn();
+    });
+  }
+
+  if (playAgainBtn) {
+    playAgainBtn.addEventListener('click', function() {
+      if (imposterState.totalPlayers < 2) {
+        showImposterPanel('imposter-setup-panel');
+        return;
+      }
+      startImposterRound(imposterState.totalPlayers);
+    });
+  }
+
+  if (resetBtn) {
+    resetBtn.addEventListener('click', function() {
+      showImposterPanel('imposter-setup-panel');
+      resetImposterSlider();
+    });
+  }
+
+  showImposterPanel('imposter-setup-panel');
+}
+
 // ─── Lightbox (shared by chat + PicReax) ──────
 function openLightbox(src) {
   let box = document.getElementById('lightbox');
@@ -929,4 +1077,5 @@ function timeAgo(ts) {
   startChatListener();
   startPresenceListener();
   initCozyAi();
+  initImposterGame();
 })();

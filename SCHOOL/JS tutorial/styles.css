@@ -1,0 +1,53 @@
+ body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background: #f4f4f4;
+        transition: 0.3s;
+    }
+
+    section {
+        background: white;
+        padding: 15px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    button {
+        margin: 5px;
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    #parent {
+        background: lightblue;
+        padding: 30px;
+    }
+
+    #child {
+        background: salmon;
+    }
+
+    .highlight {
+        background: yellow;
+        color: black;
+        font-weight: bold;
+    }
+
+    #demoBox {
+        padding: 10px;
+        border: 2px solid black;
+        width: fit-content;
+    }
+
+    input {
+        padding: 8px;
+    }
+
+    #eventLoopOutput {
+        background: black;
+        color: lime;
+        padding: 10px;
+        min-height: 120px;
+        font-family: monospace;
+    }

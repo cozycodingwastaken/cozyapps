@@ -1,0 +1,126 @@
+MIDTERM LABORATORY DRILL HANDOUT
+
+Interactive To-Do List System
+
+I. Concept Overview
+You will build an interactive To-Do List application using JavaScript events.
+Your activity should demonstrate how JavaScript responds to user interactions such as:
+• Form submission (submit)
+• Keyboard input (keyup, keydown)
+• Mouse interaction (click, mouseover, mouseout)
+• Filtering System using switch case
+II. System Features
+Your To-Do List application should support:
+• Add new task with level of prioritization
+• Mark task as done
+• Edit and save task
+• Delete task
+• Filter tasks:
+o All
+o Active
+o Completed
+o High priority
+o Medium priority
+o Low priority
+• Visual feedback (hover effects, input validation)
+III. Instructions and Reminders
+• Read each section carefully
+• Complete all missing JavaScript parts
+• Test your output using the browser console
+• Ensure your UI is clean and readable
+Reminders:
+• Use proper event handling techniques
+• Ensure code readability and structure
+• Use Proper DOM manipulation practices
+
+Part I. HTML and CSS (5pts.)
+You are given a basic UI template. Modify and improve the design to make it visually appealing and
+readable.
+Code Link: HTML FILE
+Requirements:
+• Improve layout design
+• Improve spacing and alignment
+• Add hover effects
+• Ensure readability and usability
+
+Part II. JavaScript Implementation
+Complete all missing parts and fix any errors in the code.
+A. DOM References (5pts)
+Code Link: DOM
+B. Form Submission Event (5pts.)
+Goal: Add a task when form is submitted
+Code Link: FORM SUBMISSION
+Requirements:
+• Prevent page reload
+• Capture input value
+C. KeyUp Input Validation (5pts)
+Goal: Add real-time validation while typing.
+Code Link: INPUT VALIDATION
+Requirements:
+• Detect empty input
+• Change input border color while typing
+D. Create Task function, Event Delegation, and Toggle Complete Function (20pts)
+Goal: Generate task element dynamically
+Code Link: TASK FUNCTIONS
+Requirements:
+• Create task element using JavaScript
+• Display task text and priority
+• Include Done / Edit / Delete buttons
+• Toggle completed state
+E. Filter System (10pts)
+Goal: Filter tasks based on category.
+Code Link: FILTER SYSTEM
+Requirements:
+• Use switch-case statement
+• Filter: All / Active / Completed
+• Filter by Priority: (High / Medium / Low)
+
+Part IV. Add the following features (15pts.)
+Instruction: Choose any three (3) tasks from the given set of additional features. Each selected task is
+worth five (5) points, for a total of fifteen (15) points.
+a. Implement stopPropagation for delete and done
+• Modify the system so that clicking DONE button, and DELETE button will NOT trigger parent
+event listeners
+• Use: event.stopPropagation()
+b. Add a New Event Feature (choose ONE)
+Pick only one of the following:
+Option A: Double Click to Mark Complete
+
+- Double-clicking a task should mark it as completed.
+
+Option B: Right-click Context Action
+
+- Right-click a task to delete it (use contextmenu event).
+
+c. Input Event Upgrade
+Instead of only keyup, require:
+o Show character count in real-time
+o Prevent typing if input exceeds 30 characters
+d. Task Priority UI Indicator
+Enhance system that must update dynamically when editing
+• High priority → red border
+• Medium → yellow
+• Low → green
+e. Task Activity Log System
+Add that every action logs and displayed in a log area
+• "Task added"
+• "Task completed"
+• "Task deleted"
+f. Keyboard Shortcut System
+Add shortcuts:
+• Enter → save edit
+• Escape → cancel edit
+• Ctrl + D → delete selected task
+Part V. Testing Checklist (65pts.)
+• Form submission works
+• Tasks are added correctly
+• Tasks can be marked completed
+• Tasks can be edited
+• Tasks can be deleted
+• Filters work correctly
+• At least 3 additional features implemented
+Part VI. Submission Requirements
+• Fully working system
+• Clean UI design
+• Console logs screenshot
+• Proper event handling

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JavaScript Event Drill Reviewer</title>
+
+<link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+
+<h1>JavaScript Event-Driven Programming Playground</h1>
+
+<!-- ===================================================== -->
+<section>
+<h2>1. Click Event</h2>
+
+<button id="clickBtn">Click Me</button>
+
+<p id="clickOutput">Waiting for click...</p>
+</section>
+
+<!-- ===================================================== -->
+<section>
+<h2>2. Event Bubbling + stopPropagation()</h2>
+
+<div id="parent">
+    Parent Div
+    <button id="child">Child Button</button>
+</div>
+
+<p id="bubbleOutput">Click something above.</p>
+</section>
+
+<!-- ===================================================== -->
+<section>
+<h2>3. Dynamic Text Change</h2>
+
+<p id="demoText">Original Text</p>
+
+<button id="changeText">Change Text</button>
+</section>
+
+<!-- ===================================================== -->
+<section>
+<h2>4. Dynamic Style Change</h2>
+
+<div id="demoBox">Style Me</div>
+
+<button id="changeStyle">Change Style</button>
+</section>
+
+<!-- ===================================================== -->
+<section>
+<h2>5. Toggle Class</h2>
+
+<p id="toggleText">Toggle my highlight class</p>
+
+<button id="toggleBtn">Toggle Highlight</button>
+</section>
+
+<!-- ===================================================== -->
+<section>
+<h2>6. Change Image Attribute</h2>
+
+<img 
+id="demoImg"
+src="https://placehold.co/200x120"
+width="200"
+>
+
+<br><br>
+
+<button id="changeImg">Change Image</button>
+</section>
+
+<!-- ===================================================== -->
+<section>
+<h2>7. Create Elements Dynamically</h2>
+
+<button id="createElement">Add Paragraph</button>
+
+<div id="container"></div>
+</section>
+
+<!-- ===================================================== -->
+<section>
+<h2>8. Form Validation + preventDefault()</h2>
+
+<form id="myForm">
+    <input type="text" id="inputField" placeholder="Type something">
+    <button type="submit">Submit</button>
+</form>
+
+<p id="formMessage"></p>
+</section>
+
+<!-- ===================================================== -->
+<section>
+<h2>9. Disable Button After Click</h2>
+
+<button id="disableBtn">Click Once</button>
+</section>
+
+<!-- ===================================================== -->
+<section>
+<h2>10. Key Detection</h2>
+
+<p>Press any key on your keyboard.</p>
+
+<p id="keyOutput">Waiting for key press...</p>
+</section>
+
+<!-- ===================================================== -->
+<section>
+<h2>11. Background Color Changer</h2>
+
+<button class="colorBtn">Red</button>
+<button class="colorBtn">Blue</button>
+<button class="colorBtn">Green</button>
+<button class="colorBtn">White</button>
+</section>
+
+<!-- ===================================================== -->
+<section>
+<h2>12. Event Loop Demonstration</h2>
+
+<button id="runEventLoop">Run Event Loop Example</button>
+
+<div id="eventLoopOutput"></div>
+</section>
+
+<!-- ===================================================== -->
+<script src="script.js"></script>
+
+</body>
+</html>
