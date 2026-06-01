@@ -871,12 +871,54 @@ function initCozyAi() {
 
 // ─── Imposter Game ──────────────────────────
 const IMPOSTER_EASY_WORDS = [
-  'ice cream', 'turtle', 'rainbow', 'pizza', 'banana', 'guitar', 'balloon', 'sunflower',
-  'butterfly', 'sandwich', 'campfire', 'watermelon', 'pancake', 'snowman', 'dolphin', 'cupcake',
-  'backpack', 'moonlight', 'popcorn', 'strawberry', 'jellyfish', 'toothbrush', 'playground', 'hamburger',
-  'kangaroo', 'lemonade', 'traffic light', 'chocolate', 'pineapple', 'roller coaster', 'goldfish', 'waterfall',
-  'baseball', 'headphones', 'notebook', 'milkshake', 'vacation', 'coconut', 'treasure', 'sunset',
-  'penguin', 'volcano', 'skateboard', 'pillow', 'cookie', 'jacket', 'airplane', 'island'
+  { word: 'ice cream',      hint: 'cold treat'    },
+  { word: 'turtle',         hint: 'slow animal'   },
+  { word: 'rainbow',        hint: 'colorful sky'  },
+  { word: 'pizza',          hint: 'hot food'      },
+  { word: 'banana',         hint: 'yellow fruit'  },
+  { word: 'guitar',         hint: 'makes music'   },
+  { word: 'balloon',        hint: 'floats up'     },
+  { word: 'sunflower',      hint: 'tall plant'    },
+  { word: 'butterfly',      hint: 'flying insect' },
+  { word: 'sandwich',       hint: 'quick meal'    },
+  { word: 'campfire',       hint: 'outdoor heat'  },
+  { word: 'watermelon',     hint: 'summer fruit'  },
+  { word: 'pancake',        hint: 'breakfast food' },
+  { word: 'snowman',        hint: 'winter figure' },
+  { word: 'dolphin',        hint: 'ocean animal'  },
+  { word: 'cupcake',        hint: 'sweet baked'   },
+  { word: 'backpack',       hint: 'carry things'  },
+  { word: 'moonlight',      hint: 'night glow'    },
+  { word: 'popcorn',        hint: 'crunchy snack' },
+  { word: 'strawberry',     hint: 'red fruit'     },
+  { word: 'jellyfish',      hint: 'sea creature'  },
+  { word: 'toothbrush',     hint: 'daily hygiene' },
+  { word: 'playground',     hint: 'kids play'     },
+  { word: 'hamburger',      hint: 'fast food'     },
+  { word: 'kangaroo',       hint: 'jumps far'     },
+  { word: 'lemonade',       hint: 'cold drink'    },
+  { word: 'traffic light',  hint: 'street signal' },
+  { word: 'chocolate',      hint: 'sweet flavor'  },
+  { word: 'pineapple',      hint: 'tropical fruit'},
+  { word: 'roller coaster', hint: 'fast ride'     },
+  { word: 'goldfish',       hint: 'small pet'     },
+  { word: 'waterfall',      hint: 'falling water' },
+  { word: 'baseball',       hint: 'bat sport'     },
+  { word: 'headphones',     hint: 'hear music'    },
+  { word: 'notebook',       hint: 'write things'  },
+  { word: 'milkshake',      hint: 'thick drink'   },
+  { word: 'vacation',       hint: 'time away'     },
+  { word: 'coconut',        hint: 'tropical nut'  },
+  { word: 'treasure',       hint: 'very valuable' },
+  { word: 'sunset',         hint: 'colorful sky'  },
+  { word: 'penguin',        hint: 'cold animal'   },
+  { word: 'volcano',        hint: 'hot mountain'  },
+  { word: 'skateboard',     hint: 'wheels ride'   },
+  { word: 'pillow',         hint: 'soft bedding'  },
+  { word: 'cookie',         hint: 'sweet snack'   },
+  { word: 'jacket',         hint: 'wear outside'  },
+  { word: 'airplane',       hint: 'flies high'    },
+  { word: 'island',         hint: 'water surrounded' },
 ];
 
 const imposterState = {
@@ -884,6 +926,7 @@ const imposterState = {
   currentPlayer: 1,
   imposterPlayer: 1,
   secretWord: '',
+  secretHint: '',
 };
 
 function randomItem(list) {
@@ -926,7 +969,7 @@ function showRevealScreen() {
   if (playerEl) playerEl.textContent = 'Player ' + imposterState.currentPlayer;
   if (roleEl) roleEl.textContent = isImposter ? 'You are the Imposter' : 'Your Word';
   if (wordEl) {
-    wordEl.textContent = isImposter ? 'No word' : imposterState.secretWord;
+    wordEl.textContent = isImposter ? 'Hint: ' + imposterState.secretHint : imposterState.secretWord;
     wordEl.style.color = isImposter ? '#fca5a5' : '#f5f3ff';
   }
 
@@ -937,7 +980,9 @@ function startImposterRound(playerCount) {
   imposterState.totalPlayers = playerCount;
   imposterState.currentPlayer = 1;
   imposterState.imposterPlayer = Math.floor(Math.random() * playerCount) + 1;
-  imposterState.secretWord = randomItem(IMPOSTER_EASY_WORDS);
+  const picked = randomItem(IMPOSTER_EASY_WORDS);
+  imposterState.secretWord = picked.word;
+  imposterState.secretHint = picked.hint;
   showLockScreen();
 }
 
